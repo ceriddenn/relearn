@@ -54,7 +54,7 @@ export default function GoogleOauth() {
                     );
 
                     // Fetch user information from Google
-                    const backendResponse = await axios.post(`${process.env.EXPO_PUBLIC_SERVER_URL}/auth/google`, JSON.stringify({
+                    const backendResponse = await axios.post(`${process.env.EXPO_PUBLIC_ID_SERVER_URL}/auth/google`, JSON.stringify({
                         idToken: tokenResponse.idToken,
                         accessToken: tokenResponse.accessToken,
                     }), {

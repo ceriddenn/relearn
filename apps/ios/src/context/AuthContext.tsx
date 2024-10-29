@@ -96,7 +96,7 @@ export const AuthProvider = ({ children }) => {
     const refreshJwtToken = async (refreshToken: string) => {
         try {
             const response = await axios.post(
-                `${process.env.EXPO_PUBLIC_SERVER_URL}/auth/refresh-jwt-token`,
+                `${process.env.EXPO_PUBLIC_ID_SERVER_URL}/auth/refresh-jwt-token`,
                 { refreshToken },
                 {
                     headers: { 'Content-Type': 'application/json' },
@@ -115,7 +115,7 @@ export const AuthProvider = ({ children }) => {
 
     const hasUserPassedVerifiedChecks = async () => {
         try {
-            const response = await axiosInstance.get(`${process.env.EXPO_PUBLIC_SERVER_URL}/user/preflight/verify`);
+            const response = await axiosInstance.get(`${process.env.EXPO_PUBLIC_ID_SERVER_URL}/user/preflight/verify`);
             const data: ServerPassedVerfifiedChecksResponse = await response.data;
 
             setPassedPreflight(data)
@@ -126,7 +126,7 @@ export const AuthProvider = ({ children }) => {
 
     const updateUserState = async () => {
         try {
-            const response = await axiosInstance.get(`${process.env.EXPO_PUBLIC_SERVER_URL}/user`);
+            const response = await axiosInstance.get(`${process.env.EXPO_PUBLIC_ID_SERVER_URL}/user`);
             const { user }: { user: User } = await response.data;
             setUser(user);
         } catch (error) {
@@ -138,7 +138,7 @@ export const AuthProvider = ({ children }) => {
     const validateToken = async (token: string): Promise<ValidateTokenReturnPolicy> => {
         try {
             const response = await axios.post(
-                `${process.env.EXPO_PUBLIC_SERVER_URL}/auth/validate-token`,
+                `${process.env.EXPO_PUBLIC_ID_SERVER_URL}/auth/validate-token`,
                 {},
                 {
                     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -167,7 +167,7 @@ export const AuthProvider = ({ children }) => {
         try {
             if (jwtToken && refreshToken) {
                 await axios.post(
-                    `${process.env.EXPO_PUBLIC_SERVER_URL}/auth/logout`,
+                    `${process.env.EXPO_PUBLIC_ID_SERVER_URL}/auth/logout`,
                     { refreshToken },
                     {
                         headers: { Authorization: `Bearer ${jwtToken}` },

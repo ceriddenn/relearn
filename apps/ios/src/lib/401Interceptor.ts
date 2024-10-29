@@ -8,7 +8,7 @@ import emitter from './eventEmitter';
 
 // Create Axios instance
 const axiosInstance = axios.create({
-    baseURL: `${process.env.EXPO_PUBLIC_SERVER_URL}`,
+    baseURL: process.env.EXPO_PUBLIC_API_SERVER_URL
 });
 
 // Function that will be called to refresh authorization
@@ -20,7 +20,7 @@ const refreshAuthLogic = async (failedRequest) => {
         }
 
         const response = await axios.post(
-            `${process.env.EXPO_PUBLIC_SERVER_URL}/auth/refresh-jwt-token`,
+            `${process.env.EXPO_PUBLIC_ID_SERVER_URL}/auth/refresh-jwt-token`,
             { refreshToken },
             { headers: { 'Content-Type': 'application/json' } }
         );

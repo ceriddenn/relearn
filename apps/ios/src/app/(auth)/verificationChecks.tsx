@@ -34,7 +34,7 @@ const VerificationChecks = () => {
     const onPressVerifyEmail = async () => {
         setLoading(true);
         try {
-            const response = await axiosInstance.post(`${process.env.EXPO_PUBLIC_SERVER_URL}/auth/local/identifier/verify`, {
+            const response = await axiosInstance.post(`${process.env.EXPO_PUBLIC_ID_SERVER_URL}/auth/local/identifier/verify`, {
                 code: code,
             }, {
                 headers: { 'Content-Type': "application/json" }

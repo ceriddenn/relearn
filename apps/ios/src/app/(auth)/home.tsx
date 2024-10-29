@@ -8,7 +8,7 @@ const Home = () => {
     const [userData, setUserData] = useState<any | null>(null);
     async function callAPI() {
         setUserData(null);
-        const query = await axiosInstance.get(`${process.env.EXPO_PUBLIC_SERVER_URL}/user`, {
+        const query = await axiosInstance.get(`${process.env.EXPO_PUBLIC_API_SERVER_URL}/user`, {
             headers: { Authorization: `Bearer ${jwtToken}` }
         })
         const data = await query.data;
@@ -18,7 +18,7 @@ const Home = () => {
     return (
         <TouchableWithoutFeedback onPress={() => updateUserState()}>
             <View className='flex h-screen bg-black'>
-                <Text className='text-white text-2xl font-semibold' onPress={signOut}>{user && user.signupComplete ? "true" : "False"}</Text>
+                <Text className='text-white text-2xl font-semibold' onPress={callAPI}>{user && user.signupComplete ? "true" : "False"}</Text>
             </View>
         </TouchableWithoutFeedback>
     )

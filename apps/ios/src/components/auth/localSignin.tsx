@@ -22,7 +22,7 @@ const LocalAuthSignin = () => {
 
         // do signin stuff
         try {
-            const backendResponse = await axios.post(`${process.env.EXPO_PUBLIC_SERVER_URL}/auth/local/authenticate`, {
+            const backendResponse = await axios.post(`${process.env.EXPO_PUBLIC_ID_SERVER_URL}/auth/local/authenticate`, {
                 email: email,
                 password: password,
             }, {

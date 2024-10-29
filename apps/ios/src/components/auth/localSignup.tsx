@@ -42,7 +42,7 @@ const LocalAuthSignup = () => {
         const { signal } = controllerRefEmail.current;
 
         try {
-            const response = await axios.post(`${process.env.EXPO_PUBLIC_SERVER_URL}/auth/local/identifier/available`, {
+            const response = await axios.post(`${process.env.EXPO_PUBLIC_ID_SERVER_URL}/auth/local/identifier/available`, {
                 email,
             }, {
                 headers: { 'Content-Type': 'application/json' }
@@ -135,7 +135,7 @@ const LocalAuthSignup = () => {
 
     const onSignupPress = async () => {
         try {
-            const backendResponse = await axios.post(`${process.env.EXPO_PUBLIC_SERVER_URL}/auth/local/signup`, {
+            const backendResponse = await axios.post(`${process.env.EXPO_PUBLIC_ID_SERVER_URL}/auth/local/signup`, {
                 email: email,
                 name: name,
                 password: password,

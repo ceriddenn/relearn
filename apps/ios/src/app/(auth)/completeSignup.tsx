@@ -13,7 +13,7 @@ const CompleteSignup = () => {
 
     const handleContinueAppPress = async () => {
         try {
-            const response = await axiosInstance.post(`${process.env.EXPO_PUBLIC_SERVER_URL}/auth/local/complete-signup`, {
+            const response = await axiosInstance.post(`${process.env.EXPO_PUBLIC_ID_SERVER_URL}/auth/local/complete-signup`, {
                 username: username,
             }, {
                 headers: { "Content-Type": "application/json" },
