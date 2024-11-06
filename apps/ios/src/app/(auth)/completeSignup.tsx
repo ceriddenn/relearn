@@ -23,7 +23,7 @@ const CompleteSignup = () => {
 
             if (data && data.status == 200) {
                 showToast("Welcome!", "Your account setup has been completed.", "success");
-                router.replace('/home');
+                router.replace('/app/home');
             }
 
         } catch (error) {

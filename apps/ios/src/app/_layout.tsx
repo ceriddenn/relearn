@@ -31,7 +31,7 @@ function InitialLayout() {
     if (jwtToken && !inTabsGroup) {
       if (!passedPreflight.passed) return router.replace("verificationChecks");
       if (!user.signupComplete) return router.replace("/completeSignup");
-      router.replace('/home');
+      router.replace('/app/home');
     } else if (!jwtToken) {
       router.replace('/signUp');
     }
@@ -39,16 +39,16 @@ function InitialLayout() {
   }, [jwtToken, loading, passedPreflight, user]);
 
   return (
-    <>
+    <View style={{ flex: 1 }}>
       {loading ? <Text>loading</Text> : (
         <Slot />
       )}
 
-      <View className={'fixed bottom-0 mt-auto mx-auto'}>
+      {/* <View className={'fixed bottom-0 mt-auto mx-auto'}>
         <Text className="text-gray-600 text-sm" onPress={() => signOut()}>Built with ❤️ by Finn in SC🏖️</Text>
         <Text className="text-gray-600 text-xs text-center">v1.0.2-R4-4</Text>
-      </View>
-    </>
+      </View> */}
+    </View>
   )
 }
 
@@ -67,7 +67,7 @@ export default function RootLayout() {
   });
   return (
     <AuthProvider>
-      <SafeAreaView className="bg-black">
+      <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
         <InitialLayout />
         <Toast config={toastConfig} />
       </SafeAreaView>

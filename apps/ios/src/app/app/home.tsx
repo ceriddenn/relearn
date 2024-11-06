@@ -18,7 +18,7 @@ const Home = () => {
     return (
         <TouchableWithoutFeedback onPress={() => updateUserState()}>
             <View className='flex h-screen bg-black'>
-                <Text className='text-white text-2xl font-semibold' onPress={callAPI}>{user && user.signupComplete ? "true" : "False"}</Text>
+                <Text className='text-white text-2xl font-semibold' onPress={signOut}>Dashboard</Text>
             </View>
         </TouchableWithoutFeedback>
     )

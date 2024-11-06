@@ -1,8 +1,11 @@
 // src/auth/auth.controller.ts
 import { Body, Controller, Get, NotFoundException, Post, Req, Request, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiCreatedResponse, ApiHeaders, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/guards/jwt.guard';
 import { AuthService } from 'src/services/auth/auth.service';
+import { User } from 'src/classes/swagger/user';
+import { UnauthorizedException as UE } from 'src/classes/swagger/api';
 
 @Controller('auth')
 export class AuthController {
@@ -23,6 +26,10 @@ export class AuthController {
 
     @UseGuards(JwtAuthGuard)
     @Post('validate-token')
+
+    @ApiOkResponse({ type: User, description: 'Token is marked as validated and a user object is returned.' })
+    @ApiCreatedResponse({ type: User, description: 'Token is marked as validated and a user object is returned.' })
+    @ApiUnauthorizedResponse({ type: UE, description: "Unauthorized, user is not logged in or session expired." })
     validateToken(@Request() req) {
         return { user: req.user };
     }

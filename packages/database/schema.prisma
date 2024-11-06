@@ -13,6 +13,8 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+// auth / user / account
+
 enum OauthProvider {
     GOOGLE
     META
@@ -86,4 +88,29 @@ model User {
     updatedAt DateTime @updatedAt
 
     refreshTokens RefreshToken[]
+
+    // feature links
+    cardSets CardSet[]
+}
+
+// features
+
+model CardSet {
+    id          String @id @default(cuid())
+    cards       Card[]
+    title       String
+    description String
+
+    owner   User?   @relation(fields: [ownerId], references: [id])
+    ownerId String?
+}
+
+model Card {
+    id         String  @id @default(cuid())
+    term       String
+    definition String
+    image      String?
+
+    cardSet   CardSet? @relation(fields: [cardSetId], references: [id])
+    cardSetId String?
 }
