@@ -17,8 +17,8 @@ const SignIn = () => {
 
                     <LocalAuthSignin />
 
-                    <View className='mt-4'>
-                        <Text className='text-gray-600 font-medium text-md'>--------------- Or log in with ---------------</Text>
+                    <View className='flex items-center mt-4'>
+                        <Text className='text-gray-600 font-medium text-md'>------- Or log in with -------</Text>
                     </View>
 
                     <View className='flex flex-row mt-4 justify-evenly items-center'>

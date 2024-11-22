@@ -2,7 +2,7 @@ import { Tabs } from 'expo-router';
 import { View, Animated, Easing } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useState, useEffect } from 'react';
-import { BookIcon, HomeIcon, UserIcon } from 'lucide-react-native';
+import { BookIcon, HomeIcon, UserIcon, PlusCircleIcon } from 'lucide-react-native';
 
 export default function Layout() {
     return (
@@ -14,7 +14,7 @@ export default function Layout() {
                     left: 50,
                     right: 50,
                     height: 65,
-                    backgroundColor: '#111827',
+                    backgroundColor: 'black',
                     borderRadius: 16,
                     borderTopColor: "black",
                     paddingBottom: 0,
@@ -40,8 +40,12 @@ export default function Layout() {
             })}
         >
             <Tabs.Screen name="home" />
+            <Tabs.Screen name="add" options={{
+                    tabBarStyle: { display: 'none' },
+                }}/>
             <Tabs.Screen name="cardSets" />
             <Tabs.Screen name="account" />
+
         </Tabs>
     );
 }
@@ -76,6 +80,8 @@ function AnimatedIconWithCircle({ focused, route, color, size }) {
             <Animated.View style={{ transform: [{ scale }], alignItems: 'center', justifyContent: 'center' }}>
                 {route === 'home' && <HomeIcon color={color} size={size} />}
                 {route === 'cardSets' && <BookIcon color={color} size={size} />}
+                {route === 'add' && <PlusCircleIcon color={color} size={size} />}
+
                 {route === 'account' && <UserIcon color={color} size={size} />}
 
             </Animated.View>

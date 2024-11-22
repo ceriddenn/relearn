@@ -48,15 +48,15 @@ const SignUp = () => {
                     {!pendingVerification && (
                         <View className='flex px-6 w-full'>
 
-                            <View className='flex flex-col space-y-3 mt-24'>
+                            <View className='flex flex-col space-y-3'>
                                 <Text className='font-medium text-4xl text-white'>Sign Up ✨</Text>
                                 <Text className='text-xl text-gray-400'>To get started, create an account.</Text>
 
                             </View>
                             <LocalAuthSignup />
 
-                            <View className='mt-4'>
-                                <Text className='text-gray-600 font-medium text-md'>-------------- Or sign up with --------------</Text>
+                            <View className='mt-4 flex items-center'>
+                                <Text className='text-gray-600 font-medium text-md'>------- Or sign up with -------</Text>
                             </View>
 
                             <View className='flex flex-row mt-4 justify-evenly items-center'>
