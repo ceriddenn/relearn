@@ -1,6 +1,6 @@
 import { LockKeyholeIcon, MailIcon, UserIcon } from "lucide-react-native";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import { Input } from "../input";
 import { Pulse } from "react-native-animated-spinkit";
 import axios from "axios";
@@ -33,6 +33,7 @@ const LocalAuthSignup = () => {
     null,
   );
 
+  const [waiting, setWaiting] = useState<boolean>(false);
   const [tos, setTos] = useState<boolean>(false);
 
   const [emailAvailableLoading, setEmailAvailableLoading] =
@@ -145,6 +146,7 @@ const LocalAuthSignup = () => {
   };
 
   const onSignupPress = async () => {
+    setWaiting(true);
     try {
       const backendResponse = await axios.post(
         `${process.env.EXPO_PUBLIC_ID_SERVER_URL}/auth/local/signup`,
@@ -173,6 +175,8 @@ const LocalAuthSignup = () => {
       const msg = error.response.data.message;
       showToast("Error", msg, "error");
     }
+
+    setWaiting(false);
   };
 
   return (
@@ -272,7 +276,11 @@ const LocalAuthSignup = () => {
           onPress={onSignupPress}
           className="border-[1.5px] rounded-lg bg-[#ff8fab] border-[#ff8fab] items-center py-2"
         >
-          <Text className="text-white font-medium text-lg">Sign Up</Text>
+          {waiting ? (
+            <ActivityIndicator size={"small"} className="text-white" />
+          ) : (
+            <Text className="text-white font-medium text-lg">Sign Up</Text>
+          )}
         </Pressable>
       </View>
     </>

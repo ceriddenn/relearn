@@ -16,7 +16,7 @@ const SignIn = () => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View className="flex h-screen bg-black justify-center items-center my-auto">
+      <View className="flex h-screen bg-black ">
         <View className="flex px-6 w-full">
           <LocalAuthSignin />
 

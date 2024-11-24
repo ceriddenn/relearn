@@ -138,6 +138,7 @@ export const AuthProvider = ({ children }) => {
 
     emitter.on("logout", handleLogout);
     emitter.on("updateUserState", handleUserUpdateState);
+    emitter.on("verifyEmail", handleUserUpdateState);
 
     return () => {
       emitter.off("logout", handleLogout);

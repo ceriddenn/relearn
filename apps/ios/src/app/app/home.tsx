@@ -1,21 +1,30 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Text, TouchableWithoutFeedback, View } from "react-native";
 import { AuthContext } from "@/context/AuthContext";
 import axiosInstance from "@/lib/401Interceptor";
+import { CardSet } from "@prisma/client";
+import SetCard from "@/components/home/SetCard";
+import { usePathname } from "expo-router";
 const Home = () => {
-  const { signOut, jwtToken, updateUserState } = useContext(AuthContext);
-  const [userData, setUserData] = useState<any | null>(null);
+  const pathName = usePathname();
+
+  const { signOut, updateUserState } = useContext(AuthContext);
+  const [cardSets, setCardSets] = useState<CardSet[] | null>(null);
   async function callAPI() {
-    setUserData(null);
+    setCardSets(null);
     const query = await axiosInstance.get(
-      `${process.env.EXPO_PUBLIC_API_SERVER_URL}/user`,
+      `${process.env.EXPO_PUBLIC_API_SERVER_URL}/cardset/s/actions`,
       {
-        headers: { Authorization: `Bearer ${jwtToken}` },
+        withCredentials: true,
       },
     );
     const data = await query.data;
-    setUserData(data.user);
+    setCardSets(data);
   }
+
+  useEffect(() => {
+    callAPI();
+  }, [pathName]);
 
   return (
     <TouchableWithoutFeedback onPress={() => updateUserState()}>
@@ -23,6 +32,18 @@ const Home = () => {
         <Text className="text-white text-2xl font-semibold" onPress={signOut}>
           Home
         </Text>
+        <View className="mt-6 flex flex-col gap-4">
+          {cardSets &&
+            cardSets.map((card, index) => (
+              <SetCard
+                key={index}
+                title={card.title}
+                description={card.description}
+                id={card.id}
+                topic={card.topic}
+              />
+            ))}
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );

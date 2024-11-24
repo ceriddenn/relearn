@@ -13,12 +13,14 @@ export class CardSetService {
     title: string,
     description: string,
     cards: Card[],
+    topic: string,
   ): Promise<CardSet> {
     try {
       const mutation = await this.prisma.cardSet.create({
         data: {
           title,
           description,
+          topic,
           cards: {
             createMany: {
               data: cards,

@@ -1,12 +1,7 @@
 import { Tabs } from "expo-router";
 import { View, Animated, Easing } from "react-native";
 import { useState, useEffect } from "react";
-import {
-  BookIcon,
-  HomeIcon,
-  UserIcon,
-  PlusCircleIcon,
-} from "lucide-react-native";
+import { HomeIcon, UserIcon, PlusCircleIcon } from "lucide-react-native";
 
 export default function Layout() {
   return (
@@ -22,7 +17,7 @@ export default function Layout() {
           borderRadius: 16,
           borderTopColor: "black",
           paddingBottom: 0,
-          justifyContent: "space-between",
+          justifyContent: "center",
           alignItems: "center",
         },
         tabBarItemStyle: {
@@ -55,7 +50,6 @@ export default function Layout() {
           tabBarStyle: { display: "none" },
         }}
       />
-      <Tabs.Screen name="cardSets" />
       <Tabs.Screen name="account" />
 
       {/*  Ignored Routes */}
@@ -106,7 +100,6 @@ function AnimatedIconWithCircle({ focused, route, color, size }) {
         }}
       >
         {route === "home" && <HomeIcon color={color} size={size} />}
-        {route === "cardSets" && <BookIcon color={color} size={size} />}
         {route === "add/index" && <PlusCircleIcon color={color} size={size} />}
         {route === "account" && <UserIcon color={color} size={size} />}
       </Animated.View>

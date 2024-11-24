@@ -99,7 +99,8 @@ model CardSet {
     id          String @id @default(cuid())
     cards       Card[]
     title       String
-    description String
+    description String?
+    topic       String?
 
     owner   User?   @relation(fields: [ownerId], references: [id])
     ownerId String?

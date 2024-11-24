@@ -1,12 +1,11 @@
 function getFirstWord(inputString: string): string | null {
-    if (!inputString.trim()) {
-        return null;
-    }
+  if (!inputString.trim()) {
+    return null;
+  }
 
-    const words = inputString.trim().split(/\s+/);
+  const words = inputString.trim().split(/\s+/);
 
-    return words.length > 0 ? words[0] : null;
+  return words.length > 0 ? words[0] : null;
 }
 
-
-export { getFirstWord }
+export { getFirstWord };

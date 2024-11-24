@@ -1,5 +1,6 @@
 {
   "expo": {
+    "newArchEnabled": true,
     "scheme": "relearn",
     "userInterfaceStyle": "automatic",
     "orientation": "default",
@@ -24,7 +25,8 @@
           "supportsBackgroundPlayback": true,
           "supportsPictureInPicture": true
         }
-      ]
+      ],
+      "expo-font"
     ],
     "name": "ReLearn",
     "slug": "relearn",
