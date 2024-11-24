@@ -13,4 +13,4 @@ import { JwtStrategy } from 'src/strats/jwt.strategy';
   controllers: [CardSetController],
   providers: [PrismaService, CardSetService, JwtStrategy],
 })
-export class UsersModule { }
+export class UsersModule {}

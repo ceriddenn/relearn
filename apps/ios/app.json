@@ -17,6 +17,13 @@
       ],
       [
         "expo-secure-store"
+      ],
+      [
+        "expo-video",
+        {
+          "supportsBackgroundPlayback": true,
+          "supportsPictureInPicture": true
+        }
       ]
     ],
     "name": "ReLearn",

@@ -77,12 +77,12 @@ const VerificationChecks = () => {
                         <OtpInput numberOfDigits={6} onTextChange={(text) => setCode(text)}
                             ref={pinCodeRef}
                             disabled={loading}
-                            focusColor={'#9d4edd'}
+                            focusColor={'#ff8fab'}
                             theme={{ containerStyle: { marginTop: 24, justifyContent: "space-around", gap: 0 }, pinCodeTextStyle: { color: "white" } }} />
 
                         <Pressable
                             onPress={onPressVerifyEmail}
-                            className='mt-8 border-[1.5px] rounded-lg bg-[#9d4edd] border-[#9d4edd] items-center py-2'>
+                            className='mt-8 border-[1.5px] rounded-lg bg-[#ff8fab] border-[#ff8fab] items-center py-2'>
                             <Text className='text-white font-medium text-lg'>Verify</Text>
                         </Pressable>
                     </>
@@ -96,12 +96,12 @@ const VerificationChecks = () => {
 
                         </View>
                         <OtpInput numberOfDigits={6} onTextChange={(text) => console.log(text)}
-                            focusColor={'#9d4edd'}
+                            focusColor={'#ff8fab'}
                             theme={{ containerStyle: { marginTop: 24, justifyContent: "space-around", gap: 0 }, pinCodeTextStyle: { color: "white" } }} />
 
                         <Pressable
                             onPress={onPressVerifySMS}
-                            className='mt-8 border-[1.5px] rounded-lg bg-[#9d4edd] border-[#9d4edd] items-center py-2'>
+                            className='mt-8 border-[1.5px] rounded-lg bg-[#ff8fab] border-[#ff8fab] items-center py-2'>
                             <Text className='text-white font-medium text-lg'>Verify Phone</Text>
                         </Pressable>
                     </>

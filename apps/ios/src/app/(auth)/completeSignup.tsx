@@ -54,7 +54,7 @@ const CompleteSignup = () => {
                 </View>
                 <Pressable
                     onPress={() => handleContinueAppPress()}
-                    className='mt-8 border-[1.5px] rounded-lg bg-[#9d4edd] border-[#9d4edd] items-center py-2'>
+                    className='mt-8 border-[1.5px] rounded-lg bg-[#ff8fab] border-[#ff8fab] items-center py-2'>
                     <View className='flex flex-row w-full px-4 items-center'>
                         <Text className='text-white font-medium text-lg left-0 mr-auto'>Continue to App</Text>
                         <ArrowRightCircleIcon color={'white'} size={25} />

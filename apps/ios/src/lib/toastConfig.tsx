@@ -9,7 +9,7 @@ const toastConfig = {
   success: (props) => (
     <BaseToast
       {...props}
-      style={{ borderLeftColor: '#9d4edd', backgroundColor: '#111827' }}
+      style={{ borderLeftColor: '#ff8fab', backgroundColor: '#111827' }}
       contentContainerStyle={{ paddingHorizontal: 15, flexGrow: 1, flex: 1 }}
       text1Style={{
         fontSize: 18,

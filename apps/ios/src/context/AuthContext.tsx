@@ -1,13 +1,19 @@
 // AuthContext.js
 
-import React, { createContext, useState, useEffect, useCallback, useMemo } from 'react';
-import * as SecureStore from 'expo-secure-store';
-import axios from 'axios';
-import { showToast } from '@/lib/toastConfig';
-import { User } from '@relearn/database';
-import { ServerPassedVerfifiedChecksResponse } from '@/types/policies/authPolicies';
-import emitter from '@/lib/eventEmitter';
-import axiosInstance from '@/lib/401Interceptor';
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
+import * as SecureStore from "expo-secure-store";
+import axios from "axios";
+import { showToast } from "@/lib/toastConfig";
+import { User } from "@relearn/database";
+import { ServerPassedVerfifiedChecksResponse } from "@/types/policies/authPolicies";
+import emitter from "@/lib/eventEmitter";
+import axiosInstance from "@/lib/401Interceptor";
 
 interface AuthContextType {
   jwtToken: string | null;
@@ -26,7 +32,8 @@ export const AuthProvider = ({ children }) => {
   const [refreshToken, setRefreshToken] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User | null>(null);
-  const [passedPreflight, setPassedPreflight] = useState<ServerPassedVerfifiedChecksResponse | null>(null);
+  const [passedPreflight, setPassedPreflight] =
+    useState<ServerPassedVerfifiedChecksResponse | null>(null);
 
   const validateToken = async (token: string): Promise<boolean> => {
     try {
@@ -35,7 +42,7 @@ export const AuthProvider = ({ children }) => {
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
       return response.status === 200;
     } catch {
@@ -49,12 +56,13 @@ export const AuthProvider = ({ children }) => {
         `${process.env.EXPO_PUBLIC_ID_SERVER_URL}/auth/refresh-jwt-token`,
         { refreshToken },
         {
-          headers: { 'Content-Type': 'application/json' },
-        }
+          headers: { "Content-Type": "application/json" },
+        },
       );
-      const { jwtToken: newJwtToken, refreshToken: newRefreshToken } = response.data;
-      await SecureStore.setItemAsync('jwtToken', newJwtToken);
-      await SecureStore.setItemAsync('refreshToken', newRefreshToken);
+      const { jwtToken: newJwtToken, refreshToken: newRefreshToken } =
+        response.data;
+      await SecureStore.setItemAsync("jwtToken", newJwtToken);
+      await SecureStore.setItemAsync("refreshToken", newRefreshToken);
       return { jwtToken: newJwtToken, refreshToken: newRefreshToken };
     } catch {
       return null;
@@ -63,27 +71,31 @@ export const AuthProvider = ({ children }) => {
 
   const hasUserPassedVerifiedChecks = async () => {
     try {
-      const response = await axiosInstance.get(`${process.env.EXPO_PUBLIC_ID_SERVER_URL}/user/preflight/verify`);
+      const response = await axiosInstance.get(
+        `${process.env.EXPO_PUBLIC_ID_SERVER_URL}/user/preflight/verify`,
+      );
       setPassedPreflight(response.data);
     } catch (error) {
-      console.error('Error in hasUserPassedVerifiedChecks', error);
+      console.error("Error in hasUserPassedVerifiedChecks", error);
     }
   };
 
   const updateUserState = useCallback(async () => {
     try {
-      const response = await axiosInstance.get(`${process.env.EXPO_PUBLIC_ID_SERVER_URL}/user`);
+      const response = await axiosInstance.get(
+        `${process.env.EXPO_PUBLIC_ID_SERVER_URL}/user`,
+      );
       setUser(response.data.user);
     } catch (error) {
-      console.error('Error in updateUserState', error);
+      console.error("Error in updateUserState", error);
     }
   }, []);
 
   const initializeAuth = useCallback(async () => {
     try {
       const [jwtTokenL, refreshTokenL] = await Promise.all([
-        SecureStore.getItemAsync('jwtToken'),
-        SecureStore.getItemAsync('refreshToken'),
+        SecureStore.getItemAsync("jwtToken"),
+        SecureStore.getItemAsync("refreshToken"),
       ]);
 
       if (jwtTokenL && refreshTokenL) {
@@ -98,7 +110,7 @@ export const AuthProvider = ({ children }) => {
             setJwtToken(tokens.jwtToken);
             setRefreshToken(tokens.refreshToken);
           } else {
-            showToast('Session Expired', 'Please login again', 'error');
+            showToast("Session Expired", "Please login again", "error");
             await signOut();
             return;
           }
@@ -107,7 +119,7 @@ export const AuthProvider = ({ children }) => {
         await Promise.all([updateUserState(), hasUserPassedVerifiedChecks()]);
       }
     } catch (error) {
-      console.error('Error initializing auth', error);
+      console.error("Error initializing auth", error);
     } finally {
       setLoading(false);
     }
@@ -124,12 +136,12 @@ export const AuthProvider = ({ children }) => {
       await Promise.all([updateUserState(), hasUserPassedVerifiedChecks()]);
     };
 
-    emitter.on('logout', handleLogout);
-    emitter.on('updateUserState', handleUserUpdateState);
+    emitter.on("logout", handleLogout);
+    emitter.on("updateUserState", handleUserUpdateState);
 
     return () => {
-      emitter.off('logout', handleLogout);
-      emitter.off('updateUserState', handleUserUpdateState);
+      emitter.off("logout", handleLogout);
+      emitter.off("updateUserState", handleUserUpdateState);
     };
   }, [initializeAuth, updateUserState]);
 
@@ -139,13 +151,13 @@ export const AuthProvider = ({ children }) => {
       setJwtToken(jwtToken);
       setRefreshToken(refreshToken);
       await Promise.all([
-        SecureStore.setItemAsync('jwtToken', jwtToken),
-        SecureStore.setItemAsync('refreshToken', refreshToken),
+        SecureStore.setItemAsync("jwtToken", jwtToken),
+        SecureStore.setItemAsync("refreshToken", refreshToken),
       ]);
       await Promise.all([updateUserState(), hasUserPassedVerifiedChecks()]);
       setLoading(false);
     },
-    [updateUserState]
+    [updateUserState],
   );
 
   const signOut = useCallback(async () => {
@@ -156,18 +168,18 @@ export const AuthProvider = ({ children }) => {
           { refreshToken },
           {
             headers: { Authorization: `Bearer ${jwtToken}` },
-          }
+          },
         );
       }
     } catch (error) {
-      console.error('Error in signOut', error);
+      console.error("Error in signOut", error);
     } finally {
       setJwtToken(null);
       setRefreshToken(null);
       setUser(null);
       await Promise.all([
-        SecureStore.deleteItemAsync('jwtToken'),
-        SecureStore.deleteItemAsync('refreshToken'),
+        SecureStore.deleteItemAsync("jwtToken"),
+        SecureStore.deleteItemAsync("refreshToken"),
       ]);
     }
   }, [jwtToken, refreshToken]);
@@ -182,8 +194,20 @@ export const AuthProvider = ({ children }) => {
       updateUserState,
       passedPreflight,
     }),
-    [jwtToken, user, loading, signIn, signOut, updateUserState, passedPreflight]
+    [
+      jwtToken,
+      user,
+      loading,
+      signIn,
+      signOut,
+      updateUserState,
+      passedPreflight,
+    ],
   );
 
-  return <AuthContext.Provider value={authContextValue}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={authContextValue}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

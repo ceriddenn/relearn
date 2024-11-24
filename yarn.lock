@@ -6804,6 +6804,11 @@ expo-auth-session@^5.5.2:
     expo-web-browser "~13.0.0"
     invariant "^2.2.4"
 
+expo-av@^15.0.1:
+  version "15.0.1"
+  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-15.0.1.tgz#c337f831c2e29174de7117c37d2f92c1275bb4c4"
+  integrity sha512-2d4j7RTH9Y5nI1FoC0woRjqnj5G8sF0al2iW6kG21PPs/CgS4QARbHxMrPxKpUXrC6iu+6EMj2h5H6T0nqteFg==
+
 expo-constants@~16.0.0, expo-constants@~16.0.1:
   version "16.0.2"
   resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-16.0.2.tgz#eb5a1bddb7308fd8cadac8fc44decaf4784cac5e"
@@ -6967,6 +6972,11 @@ expo-vector-icons@^10.0.1:
   integrity sha512-71WogLm9icxguMFKNtKKhHBgAwJ4lLzh4iUh6YB35+yeCfR/vIHI+4K6RAxbJQ9tLtRdwyxD+UAU0wN7m44cAA==
   dependencies:
     lodash "^4.17.4"
+
+expo-video@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/expo-video/-/expo-video-2.0.1.tgz#0e15f14d36acaf4f52d1a64b6223e2bd22a0b073"
+  integrity sha512-daPPGT1mfUjcVNjI5xQIskNS0hYlfoy0rierLnJWePYfDxNozrFbFyD0SvwjQN6QoQ9dSytIMSBWJTAHfuvMWg==
 
 expo-web-browser@^13.0.3, expo-web-browser@~13.0.0:
   version "13.0.3"

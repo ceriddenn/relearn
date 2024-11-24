@@ -22,7 +22,7 @@ const Checkbox = React.forwardRef<
                 <Check
                     size={12}
                     strokeWidth={4}
-                    color={'#9d4edd'}
+                    color={'#ff8fab'}
                 />
             </CheckboxPrimitive.Indicator>
         </CheckboxPrimitive.Root>
