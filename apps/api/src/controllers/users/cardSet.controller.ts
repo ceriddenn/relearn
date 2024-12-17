@@ -4,6 +4,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Request,
   UseGuards,
@@ -11,11 +12,15 @@ import {
 import { Card } from '@prisma/client';
 import { JwtAuthGuard } from 'src/guards/jwt.guard';
 import { CardSetService } from 'src/services/cardSet/cardSet.service';
+import { PrismaService } from 'src/services/prisma/prisma.service';
 import { PreflightGuard } from 'src/strats/preflight.strategy';
 
 @Controller('cardset')
 export class CardSetController {
-  constructor(private readonly cardSetService: CardSetService) {}
+  constructor(
+    private readonly cardSetService: CardSetService,
+    private prisma: PrismaService,
+  ) {}
 
   @UseGuards(JwtAuthGuard, PreflightGuard)
   @Post('/s/actions')
@@ -51,6 +56,11 @@ export class CardSetController {
     return result;
   }
 
+  @Get('/s')
+  async get1(@Request() req) {
+    return { headers: req };
+  }
+
   @UseGuards(JwtAuthGuard)
   @Get('/s/actions')
   async getAllCards(@Request() req) {
@@ -62,5 +72,21 @@ export class CardSetController {
 
   @UseGuards(JwtAuthGuard)
   @Delete('/s/actions')
-  async removeCard() {}
+  async removeCard(@Request() req, @Body('setId') setId) {
+    await this.cardSetService.removeCardSet(req.user.id, setId);
+
+    return { message: 'Removed successfully.', code: 200 };
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/s/cards/:setId')
+  async getSetCards(@Request() req, @Param('setId') setId) {
+    if (!setId)
+      throw new BadRequestException('Please provide a set id with the request');
+    const result = await this.cardSetService.retrieveSetCardsWithSetId(
+      req.user.id,
+      setId,
+    );
+    return result;
+  }
 }

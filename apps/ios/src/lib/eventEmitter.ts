@@ -1,6 +1,6 @@
 // src/utils/eventEmitter.js
 
-import mitt from 'mitt';
+import mitt from "mitt";
 
 const emitter = mitt();
 

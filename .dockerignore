@@ -1,0 +1,6 @@
+/node_modules
+**/dist
+.git
+apps/**/.env
+!apps/**/node_modules
+!packages/**/node_modules

@@ -165,8 +165,6 @@ const LocalAuthSignup = () => {
         const data = await backendResponse.data;
         const { jwtToken, refreshToken }: ServerValidateTokenResponse = data;
         await signIn(jwtToken, refreshToken);
-
-        showToast("Success", "Authentication successful.", "success");
       } else {
         await backendResponse.data;
         showToast("Error", "Please try again.");

@@ -3,6 +3,7 @@ import { Slot, useRouter, useSegments } from "expo-router";
 import { useContext, useEffect, useState } from "react";
 import { SafeAreaView, Text, View } from "react-native";
 import { useFonts } from "expo-font";
+
 import {
   Poppins_100Thin,
   Poppins_200ExtraLight,
@@ -36,7 +37,8 @@ function InitialLayout() {
     } else if (!jwtToken) {
       router.replace("/signUp");
     }
-  }, [jwtToken, loading, passedPreflight, user]);
+    // removed user from depend array 11/24
+  }, [jwtToken, loading, passedPreflight]);
 
   return (
     <View style={{ flex: 1 }}>

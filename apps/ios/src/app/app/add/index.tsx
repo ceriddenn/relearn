@@ -23,18 +23,18 @@ const Add = () => {
       icon: <BookIcon size={20} color="white" style={{ marginLeft: 12 }} />,
       href: "app/add/set",
     },
-    {
-      title: "Create a Study Guide",
-      icon: (
-        <PaperclipIcon size={20} color="white" style={{ marginLeft: 12 }} />
-      ),
-      href: "app/add/StudyGuide",
-    },
-    {
-      title: "Create Notes",
-      icon: <PencilIcon size={20} color="white" style={{ marginLeft: 12 }} />,
-      href: "app/add/Notes",
-    },
+    // {
+    //   title: "Create a Study Guide",
+    //   icon: (
+    //     <PaperclipIcon size={20} color="white" style={{ marginLeft: 12 }} />
+    //   ),
+    //   href: "app/add/StudyGuide",
+    // },
+    // {
+    //   title: "Create Notes",
+    //   icon: <PencilIcon size={20} color="white" style={{ marginLeft: 12 }} />,
+    //   href: "app/add/Notes",
+    // },
   ];
 
   return (

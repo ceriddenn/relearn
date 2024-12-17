@@ -9,7 +9,7 @@ import {
 import { PhoneIcon } from "lucide-react-native";
 import { useRouter } from "expo-router";
 import GoogleOauth from "@/components/auth/google";
-import MetaOauth from "@/components/auth/meta";
+//import MetaOauth from "@/components/auth/meta";
 import LocalAuthSignup from "@/components/auth/localSignup";
 
 const SignUp = () => {
@@ -42,11 +42,10 @@ const SignUp = () => {
             </View>
 
             <View className="flex flex-row mt-4 justify-evenly items-center">
-              <Pressable className="rounded-lg bg-gray-900 shadow-sm py-3 px-3">
+              {/* <Pressable className="rounded-lg bg-gray-900 shadow-sm py-3 px-3">
                 <PhoneIcon color={"white"} width={30} height={30} />
-              </Pressable>
+              </Pressable> */}
               <GoogleOauth />
-              <MetaOauth />
             </View>
 
             <View className="flex mt-12 mx-auto flex flex-row">

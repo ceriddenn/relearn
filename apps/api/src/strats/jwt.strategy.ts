@@ -26,7 +26,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
     console.log(payload);
     if (!user) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('No user found.');
     }
     const tokenIssuedAt = new Date(payload.iat * 1000); // Convert iat to milliseconds
     if (user.lastLogout && tokenIssuedAt < user.lastLogout) {

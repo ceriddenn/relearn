@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Image,
   Keyboard,
   Pressable,
   Text,
@@ -27,16 +26,10 @@ const SignIn = () => {
           </View>
 
           <View className="flex flex-row mt-4 justify-evenly items-center">
-            <Pressable className="rounded-lg bg-gray-900 shadow-sm py-3 px-3">
+            {/* <Pressable className="rounded-lg bg-gray-900 shadow-sm py-3 px-3">
               <PhoneIcon color={"white"} width={30} height={30} />
-            </Pressable>
+            </Pressable> */}
             <GoogleOauth />
-            <Pressable className="rounded-lg bg-gray-900 shadow-sm py-3 px-3">
-              <Image
-                source={require("assets/images/snap1.png")}
-                className="w-9 h-9"
-              />
-            </Pressable>
           </View>
 
           <View className="flex mt-12 mx-auto flex flex-row">

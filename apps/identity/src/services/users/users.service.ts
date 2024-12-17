@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import {
   Account,
   OauthProvider,
@@ -19,6 +23,71 @@ type AccountWithUser = Prisma.AccountGetPayload<{ include: { user: true } }>;
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
+
+  async allowedToChangeUsername(userId: string): Promise<void> {
+    try {
+      const query = await this.prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+      });
+
+      const now = new Date(); // Current date and time
+      const futureThreshold = new Date(
+        query.usernameUpdatedAt.getTime() + 30 * 24 * 60 * 60 * 1000,
+      ); // 30 days after the usernameUpdatedAt date
+
+      const millisecondsUntilThreshold =
+        futureThreshold.getTime() - now.getTime();
+
+      const daysUntilFutureThreshold = Math.ceil(
+        millisecondsUntilThreshold / (1000 * 60 * 60 * 24),
+      );
+
+      if (millisecondsUntilThreshold > 0) {
+        throw new BadRequestException(
+          `You can change your username in ${daysUntilFutureThreshold} days.`,
+        );
+      }
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException(error.response.message);
+    }
+  }
+
+  async updateName(name: string, userId: string): Promise<User | null> {
+    return await this.prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        name: name,
+      },
+    });
+  }
+
+  async updateUsername(
+    newUsername: string,
+    userId: string,
+  ): Promise<User | null> {
+    return await this.prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        usernameUpdatedAt: new Date(),
+        username: newUsername,
+      },
+    });
+  }
+
+  async findAccountById(accountId: string): Promise<Account | null> {
+    return await this.prisma.account.findUnique({
+      where: {
+        id: accountId,
+      },
+    });
+  }
 
   async findByEmail(email: string): Promise<User | null> {
     return await this.prisma.user.findUnique({

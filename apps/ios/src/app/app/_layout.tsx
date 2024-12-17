@@ -17,6 +17,7 @@ export default function Layout() {
           borderRadius: 16,
           borderTopColor: "black",
           paddingBottom: 0,
+          paddingTop: 12,
           justifyContent: "center",
           alignItems: "center",
         },
@@ -56,6 +57,13 @@ export default function Layout() {
 
       <Tabs.Screen
         name="add/set"
+        options={{
+          tabBarStyle: { display: "none" },
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="study/flashcards"
         options={{
           tabBarStyle: { display: "none" },
           href: null,

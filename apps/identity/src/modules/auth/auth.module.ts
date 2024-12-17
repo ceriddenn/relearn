@@ -18,11 +18,20 @@ import { CodeService } from 'src/services/auth/code.service';
 dotenv.config();
 
 @Module({
-    imports: [JwtModule.register({
-        secret: process.env.RELEARN_JWT_SECRET, // Use environment variable in production
-        signOptions: { expiresIn: process.env.RELEARN_JWT_EXPIRATION }, // Adjust token expiration as needed
-    }), UsersModule],
-    controllers: [AuthController, LocalAuthController],
-    providers: [AuthService, JwtStrategy, PrismaService, LocalAuthService, CodeService],
+  imports: [
+    JwtModule.register({
+      secret: process.env.RELEARN_JWT_SECRET, // Use environment variable in production
+      signOptions: { expiresIn: process.env.RELEARN_JWT_EXPIRATION }, // Adjust token expiration as needed
+    }),
+    UsersModule,
+  ],
+  controllers: [AuthController, LocalAuthController],
+  providers: [
+    AuthService,
+    JwtStrategy,
+    PrismaService,
+    LocalAuthService,
+    CodeService,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}
